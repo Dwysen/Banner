@@ -1,6 +1,6 @@
 # Banner
 
-## 三种IOS轮播图
+### 三种IOS轮播图
 
 #### 渐隐 FadeViewController
 
