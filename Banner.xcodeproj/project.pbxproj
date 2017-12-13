@@ -30,6 +30,7 @@
 		52F30EC11FDFADD2000A347C /* ParallaxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F30EC01FDFADD2000A347C /* ParallaxViewController.swift */; };
 		52F30EC31FDFAE25000A347C /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F30EC21FDFAE25000A347C /* Math.swift */; };
 		52F30EC51FDFAEFD000A347C /* ParallaxImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F30EC41FDFAEFD000A347C /* ParallaxImageView.swift */; };
+		52F363031FDFD06E00419707 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F363021FDFD06E00419707 /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		52F30EC01FDFADD2000A347C /* ParallaxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxViewController.swift; sourceTree = "<group>"; };
 		52F30EC21FDFAE25000A347C /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		52F30EC41FDFAEFD000A347C /* ParallaxImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxImageView.swift; sourceTree = "<group>"; };
+		52F363021FDFD06E00419707 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				52F30EB71FDF975C000A347C /* CardViewController.swift */,
+				52F363021FDFD06E00419707 /* CardCell.swift */,
 				52F30EBB1FDF98A0000A347C /* CollectionLayout.swift */,
 			);
 			path = Card;
@@ -365,6 +368,7 @@
 				52EB0E3E1FCE4B1D006F0382 /* GCDGroup.swift in Sources */,
 				52EB0E361FCE4818006F0382 /* TranformFadeView.swift in Sources */,
 				52EB0E3C1FCE4AA2006F0382 /* GCDQueuePriority.swift in Sources */,
+				52F363031FDFD06E00419707 /* CardCell.swift in Sources */,
 				52F30EB81FDF975C000A347C /* CardViewController.swift in Sources */,
 				52F30EC31FDFAE25000A347C /* Math.swift in Sources */,
 				52EB0E3A1FCE4A6A006F0382 /* GCDQueue.swift in Sources */,

@@ -8,10 +8,7 @@
 
 import UIKit
 
-class CardViewController : TitleVisualEffectViewController {
-    
-    let screenWidth = UIScreen.main.bounds.size.width
-    let screenHeight = UIScreen.main.bounds.size.height
+class CardViewController : BaseViewController {
     
     private var collectionView:UICollectionView?
     private var layout:CollectionLayout?
@@ -19,11 +16,15 @@ class CardViewController : TitleVisualEffectViewController {
     private var pageFrame = UIScreen.main.bounds.size.width - 60
     private var sectionCount = 50
     
+    var backView:UIView!
+    var imgView:UIImageView!
+    
     
     private var imgUrl = ["st","sf","four","qop","jt"]
     private var changePageTimer:Timer?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         setupUI()
@@ -44,23 +45,35 @@ class CardViewController : TitleVisualEffectViewController {
     private func setupUI(){
         
         layout = CollectionLayout()
-        layout?.itemSize = CGSize(width: screenWidth - 80, height: 200)
+        layout?.itemSize = CGSize(width: Screen.Width - 80, height: 200)
         
-        let rect = CGRect(x: 0, y: 66, width:screenWidth, height: 250)
+        let blackBack = UIView(frame: CGRect(x: 0, y: 0, width: Screen.Width , height: 66 + 125))
+        blackBack.backgroundColor = UIColor.black
+        view.addSubview(blackBack)
+        
+        let backButton    = UIButton(frame: CGRect(x: 15, y: 15, width: 21, height: 35))
+        backButton.setImage(UIImage(named: "left_arrow_"),     for: .normal)
+        backButton.addTarget(self, action: #selector(popSelf), for: .touchUpInside)
+        blackBack.addSubview(backButton)
+        
+        
+        let rect = CGRect(x: 0, y: 66, width:Screen.Width, height: 250)
         collectionView = UICollectionView(frame: rect, collectionViewLayout: layout!)
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.register(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cell")
+        collectionView?.bounces = false
+        collectionView?.register(CardCell.classForCoder(), forCellWithReuseIdentifier: "cell")
         
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = UIColor.clear
     
         collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
         view.addSubview(collectionView!)
-        view.bringSubview(toFront: titleView)
         
-    }
+//        view.bringSubview(toFront: titleView)
     
+    }
+
     @objc private func autoNextPage(){
         
         guard page < sectionCount * imgUrl.count - 1 else {
@@ -80,8 +93,8 @@ class CardViewController : TitleVisualEffectViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        changePageTimer?.invalidate()
+    override func viewDidDisappear(_ animated: Bool) {
+         changePageTimer?.invalidate()
     }
     
     deinit {
@@ -93,6 +106,12 @@ class CardViewController : TitleVisualEffectViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc private func popSelf(){
+
+        self.navigationController?.popViewController(animated: true)
+
+    }
+
 }
 
 
@@ -102,34 +121,22 @@ extension CardViewController:UICollectionViewDataSource {
         return sectionCount
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgUrl.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        let imgView = UIImageView(frame: cell.contentView.bounds)
-        imgView.image = UIImage(named: imgUrl[indexPath.row])
-        imgView.layer.cornerRadius = 10
-        imgView.layer.masksToBounds = true
-        cell.addSubview(imgView)
-        
-        cell.contentView.layer.shadowOpacity = 0.8
-        cell.contentView.layer.shadowColor = UIColor.black.cgColor
-        cell.contentView.layer.shadowOffset = CGSize(width: 10, height: 10)
-        cell.contentView.layer.shadowRadius = 3
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CardCell
+        cell.imgView.image = UIImage(named: imgUrl[indexPath.item])
         return cell
     }
-    
     
 }
 
 extension CardViewController:UICollectionViewDelegate{
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
-        print(scrollView.contentOffset.x / pageFrame)
         
         page = Int(scrollView.contentOffset.x / pageFrame)
         

@@ -14,16 +14,15 @@ class TableViewController: BaseViewController {
     private let screenHeight = UIScreen.main.bounds.height
     private var tableView : UITableView!
     
-    private let titleArr = ["TransformFade","Card","Banner"]
+    private let titleArr = ["TransformFade","Card","Vertical"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Banner"
         
-        let fpsLabel = FPSLabel(frame: CGRect(x: UIScreen.main.bounds.width - 45.0, y:UIScreen.main.bounds.height - 25.0 , width: 40.0, height: 20.0))
-        //        view.addSubview(fpsLabel)
-        UIApplication.shared.keyWindow?.addSubview(fpsLabel)
+//        let fpsLabel = FPSLabel(frame: CGRect(x: UIScreen.main.bounds.width - 45.0, y:UIScreen.main.bounds.height - 25.0 , width: 40.0, height: 20.0))
+//        UIApplication.shared.keyWindow?.addSubview(fpsLabel)
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight - 64 - 49 ))
         
@@ -71,6 +70,7 @@ extension TableViewController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == 0 {
             
             let vc = TransformFadeViewController()
+            vc.title = titleArr[0]
             navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -78,6 +78,7 @@ extension TableViewController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == 1 {
             
             let vc = CardViewController()
+            vc.title = titleArr[1]
             navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -85,6 +86,7 @@ extension TableViewController:UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == 2 {
         
             let vc = ScrollImageViewController()
+            vc.title = titleArr[2]
             navigationController?.pushViewController(vc, animated: true)
             
         }

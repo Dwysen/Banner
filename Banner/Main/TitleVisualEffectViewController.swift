@@ -34,7 +34,7 @@ class TitleVisualEffectViewController: BaseViewController {
         headlineLabel.font          = UIFont.HeitiSC(20)
         headlineLabel.textAlignment = .center
         headlineLabel.textColor     = UIColor(red: 0.329, green: 0.329, blue: 0.329, alpha: 1)
-        headlineLabel.text          = "Banner"
+        headlineLabel.text          = title
         headlineLabel.bottom        = effectView.height
         
         let backButton    = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
@@ -55,7 +55,7 @@ class TitleVisualEffectViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc private func popSelf(){
+    @objc func popSelf(){
         
         self.navigationController?.popViewController(animated: true)
         

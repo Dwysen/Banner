@@ -47,18 +47,33 @@ class TransformFadeViewController: TitleVisualEffectViewController {
         view.addSubview(tranformFadeViewTwo)
         view.bringSubview(toFront: titleView)
         
-        gcdTimer          = GCDTimer(in: GCDQueue.Main, delay: 1.0, interval: 8.0)
+        setTimer(delay: 0)
+    
+    }
+    
+    fileprivate func setTimer(delay:Float){
+        
+        gcdTimer          = GCDTimer(in: GCDQueue.Main, delay:delay, interval: 6.0)
         weak var weakSelf = self
         gcdTimer.setTimerEventHandler { _ in
-            
-            weakSelf?.tapImage()
-    
+            weakSelf?.change()
         }
         
         gcdTimer.start()
+        
+        
     }
     
     @objc fileprivate func tapImage(){
+        
+        change()
+        
+        gcdTimer.destroy()
+        setTimer(delay: 6)
+        
+    }
+    
+    fileprivate func change(){
         
         weak var weakSelf = self
         
@@ -78,7 +93,8 @@ class TransformFadeViewController: TitleVisualEffectViewController {
             weakSelf?.tranformFadeViewOne.start(animated: false, transformTo: .show)
             weakSelf?.tranformFadeViewTwo.start(animated: true,  transformTo: .fade)
         }
-     
+        
+        
     }
     
     deinit {
